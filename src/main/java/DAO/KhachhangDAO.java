@@ -30,7 +30,6 @@ public class KhachhangDAO {
                 tmp = new KhachhangDTO();
                 tmp.setMa_khach_hang(rs.getInt("ma_khach_hang"));
                 tmp.setHo_ten(rs.getString("ho_ten"));
-                tmp.setMa_tai_khoan(rs.getInt("ma_tai_khoan"));
                 tmp.setDien_thoai(rs.getInt("dien_thoai"));
                 tmp.setDia_chi(rs.getString("dia_chi"));
                 listTmp.add(tmp);

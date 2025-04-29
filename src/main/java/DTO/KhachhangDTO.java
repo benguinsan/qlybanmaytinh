@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.Date;
+
 /**
  *
  * @author mrben
@@ -14,18 +16,18 @@ public class KhachhangDTO {
     private String ho_ten;
     private String dia_chi;
     private int dien_thoai;
-    private int ma_tai_khoan;
+    private Date created_at;
     
     public KhachhangDTO() {
 
     }
     
-    public KhachhangDTO(int ma_khach_hang, String ho_ten, String dia_chi, int dien_thoai, int ma_tai_khoan) {
+    public KhachhangDTO(int ma_khach_hang, String ho_ten, String dia_chi, int dien_thoai, Date create_at) {
         this.ma_khach_hang = ma_khach_hang;
         this.ho_ten = ho_ten;
         this.dia_chi = dia_chi;
         this.dien_thoai = dien_thoai;
-        this.ma_tai_khoan = ma_tai_khoan;
+        this.created_at = create_at;
     }
     
     public int getMa_khach_hang() {
@@ -60,12 +62,12 @@ public class KhachhangDTO {
         this.dien_thoai = dien_thoai;
     }
 
-    public int getMa_tai_khoan() {
-        return ma_tai_khoan;
+    public Date getCreate_at() {
+        return created_at;
     }
 
-    public void setMa_tai_khoan(int ma_tai_khoan) {
-        this.ma_tai_khoan = ma_tai_khoan;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
             
 }

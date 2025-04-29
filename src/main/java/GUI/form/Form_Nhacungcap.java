@@ -35,7 +35,7 @@ public class Form_Nhacungcap extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(180, 180, 180))
         );
@@ -44,7 +44,7 @@ public class Form_Nhacungcap extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel1)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
