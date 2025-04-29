@@ -4,6 +4,10 @@
  */
 package GUI.form;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JTextField;
+
 /**
  *
  * @author mrben
@@ -16,6 +20,20 @@ public class Form_Khachhang extends javax.swing.JPanel {
     public Form_Khachhang() {
         initComponents();
     }
+    
+    public void addPlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.ITALIC);
+        jtf.setFont(f);
+        jtf.setForeground(Color.gray);
+    }
+
+    public void removePlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.PLAIN | Font.BOLD);
+        jtf.setFont(f);
+        jtf.setForeground(Color.black);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,30 +44,235 @@ public class Form_Khachhang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jtf_search = new javax.swing.JTextField();
+        reloadBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        infoBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mainTbl = new javax.swing.JTable();
 
-        jLabel1.setText("khach hang");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jtf_search.setText("Search by ID/name");
+        jtf_search.setPreferredSize(new java.awt.Dimension(300, 22));
+        jtf_search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_searchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_searchFocusLost(evt);
+            }
+        });
+        jtf_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_searchActionPerformed(evt);
+            }
+        });
+
+        reloadBtn.setBackground(new java.awt.Color(153, 153, 153));
+        reloadBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/icons8-reload-30.png"))); // NOI18N
+        reloadBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reloadBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        reloadBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        reloadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reloadBtnMouseClicked(evt);
+            }
+        });
+
+        addBtn.setBackground(new java.awt.Color(204, 204, 204));
+        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/plus.png"))); // NOI18N
+        addBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        addBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtnMouseClicked(evt);
+            }
+        });
+
+        deleteBtn.setBackground(new java.awt.Color(204, 204, 204));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/delete.png"))); // NOI18N
+        deleteBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        deleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteBtnMouseClicked(evt);
+            }
+        });
+
+        updateBtn.setBackground(new java.awt.Color(204, 204, 204));
+        updateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/office-material.png"))); // NOI18N
+        updateBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        updateBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtnMouseClicked(evt);
+            }
+        });
+
+        infoBtn.setBackground(new java.awt.Color(204, 204, 204));
+        infoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/information.png"))); // NOI18N
+        infoBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        infoBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        infoBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        infoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                infoBtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        mainTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Điện thoại", "Ngày tham gia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        mainTbl.setColumnSelectionAllowed(true);
+        mainTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainTblClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(mainTbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel1)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtf_searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchFocusGained
+        if (jtf_search.getText().equals("Search by ID/name")) {
+            jtf_search.setText(null);
+            jtf_search.requestFocus();
+            removePlaceHolderStyle(jtf_search);
+        }
+    }//GEN-LAST:event_jtf_searchFocusGained
+
+    private void jtf_searchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchFocusLost
+        if (jtf_search.getText().length() == 0) {
+            addPlaceHolderStyle(jtf_search);
+            jtf_search.setText("Search by ID/name");
+        }
+    }//GEN-LAST:event_jtf_searchFocusLost
+
+    private void jtf_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_searchActionPerformed
+
+    private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reloadBtnMouseClicked
+
+    private void infoBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_infoBtnMouseClicked
+
+    private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBtnMouseClicked
+
+    private void deleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnMouseClicked
+
+    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addBtnMouseClicked
+
+    private void mainTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTblClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainTblClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton infoBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jtf_search;
+    private javax.swing.JTable mainTbl;
+    private javax.swing.JButton reloadBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
