@@ -4,7 +4,7 @@
  */
 package DTO;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -12,73 +12,72 @@ import java.time.LocalDateTime;
  */
 public class CTKhuyenMaiDTO {
 
-   
-    private int ma_ctkm;
-    private String ten_ctkm;
-    private String mota;
-    private LocalDateTime ngay_bat_dau;
-    private LocalDateTime ngay_ket_thuc;
-    private int trangthai;
-    
+    private String ma_ctkm;
+    private String TenChuongTrinh;
+    private Date NgayBatDau;
+    private Date NgayKetThuc;
+    private String MoTa;
+    private int TrangThai;
+
     public CTKhuyenMaiDTO() {
-       
+
     }
-    
-    public CTKhuyenMaiDTO(int ma_ctkm, String ten_ctkm, String mota, LocalDateTime ngay_bat_dau, LocalDateTime ngay_ket_thuc, int trangthai) {
+
+    public CTKhuyenMaiDTO(String ma_ctkm, String TenChuongTrinh, Date NgayBatDau, Date NgayKetThuc,
+            String MoTa, int TrangThai) {
         this.ma_ctkm = ma_ctkm;
-        this.ten_ctkm = ten_ctkm;
-        this.mota = mota;
-        this.ngay_bat_dau = ngay_bat_dau;
-        this.ngay_ket_thuc = ngay_ket_thuc;
-        this.trangthai = trangthai;
+        this.TenChuongTrinh = TenChuongTrinh;
+        this.NgayBatDau = NgayBatDau;
+        this.NgayKetThuc = NgayKetThuc;
+        this.MoTa = MoTa;
+        this.TrangThai = TrangThai;
     }
-    
-    public int getMa_ctkm() {
+
+    public String getMa_ctkm() {
         return ma_ctkm;
     }
 
-    public void setMa_ctkm(int ma_ctkm) {
+    public void setMa_ctkm(String ma_ctkm) {
         this.ma_ctkm = ma_ctkm;
     }
 
-    public String getTen_ctkm() {
-        return ten_ctkm;
+    public String getTenChuongTrinh() {
+        return TenChuongTrinh;
     }
 
-    public void setTen_ctkm(String ten_ctkm) {
-        this.ten_ctkm = ten_ctkm;
+    public void setTenChuongTrinh(String TenChuongTrinh) {
+        this.TenChuongTrinh = TenChuongTrinh;
     }
 
-    public String getMota() {
-        return mota;
+    public Date getNgayBatDau() {
+        return NgayBatDau;
     }
 
-    public void setMota(String mota) {
-        this.mota = mota;
+    public void setNgayBatDau(Date NgayBatDau) {
+        this.NgayBatDau = NgayBatDau;
     }
 
-    public LocalDateTime getNgay_bat_dau() {
-        return ngay_bat_dau;
+    public Date getNgayKetThuc() {
+        return NgayKetThuc;
     }
 
-    public void setNgay_bat_dau(LocalDateTime ngay_bat_dau) {
-        this.ngay_bat_dau = ngay_bat_dau;
+    public void setNgayKetThuc(Date NgayKetThuc) {
+        this.NgayKetThuc = NgayKetThuc;
     }
 
-    public LocalDateTime getNgay_ket_thuc() {
-        return ngay_ket_thuc;
+    public String getMoTa() {
+        return MoTa;
     }
 
-    public void setNgay_ket_thuc(LocalDateTime ngay_ket_thuc) {
-        this.ngay_ket_thuc = ngay_ket_thuc;
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
     }
 
-    public int getTrangthai() {
-        return trangthai;
+    public int getTrangThai() {
+        return TrangThai;
     }
 
-    public void setTrangthai(int trangthai) {
-        this.trangthai = trangthai;
+    public void setTrangThai(int TrangThai) {
+        this.TrangThai = TrangThai;
     }
-    
 }

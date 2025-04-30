@@ -5,7 +5,7 @@
 package DTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -13,61 +13,61 @@ import java.time.LocalDateTime;
  */
 public class PhieunhapDTO {
 
-    private int ma_phieu_nhap;
-    private int ma_nv;
-    private int ma_ncc;
-    private LocalDateTime ngay_nhap;
-    private float tong_tien;
+    private String ma_pn;
+    private String ma_nhan_vien;
+    private String ma_ncc;
+    private Date NgayNhap;
+    private double TongTien;
     
     public PhieunhapDTO() {
         
     }
     
-    public PhieunhapDTO(int ma_phieu_nhap, int ma_nv, int ma_ncc, LocalDateTime ngay_nhap, float tong_tien) {
-        this.ma_phieu_nhap = ma_phieu_nhap;
-        this.ma_nv = ma_nv;
+    public PhieunhapDTO(String ma_pn, String ma_nhan_vien, String ma_ncc, Date NgayNhap, double TongTien) {
+        this.ma_pn = ma_pn;
+        this.ma_nhan_vien = ma_nhan_vien;
         this.ma_ncc = ma_ncc;
-        this.ngay_nhap = ngay_nhap;
-        this.tong_tien = tong_tien;
+        this.NgayNhap = NgayNhap;
+        this.TongTien = TongTien;
     }
     
-    public int getMa_phieu_nhap() {
-        return ma_phieu_nhap;
+    public String getMa_pn() {
+        return ma_pn;
     }
 
-    public void setMa_phieu_nhap(int ma_phieu_nhap) {
-        this.ma_phieu_nhap = ma_phieu_nhap;
+    public void setMa_pn(String ma_pn) {
+        this.ma_pn = ma_pn;
     }
 
-    public int getMa_nv() {
-        return ma_nv;
+    public String getMa_nhan_vien() {
+        return ma_nhan_vien;
     }
 
-    public void setMa_nv(int ma_nv) {
-        this.ma_nv = ma_nv;
+    public void setMa_nhan_vien(String ma_nhan_vien) {
+        this.ma_nhan_vien = ma_nhan_vien;
     }
 
-    public int getMa_ncc() {
+    public String getMa_ncc() {
         return ma_ncc;
     }
 
-    public void setMa_ncc(int ma_ncc) {
+    public void setMa_ncc(String ma_ncc) {
         this.ma_ncc = ma_ncc;
     }
 
-    public LocalDateTime getNgay_nhap() {
-        return ngay_nhap;
+    public Date getNgayNhap() {
+        return NgayNhap;
     }
 
-    public void setNgay_nhap(LocalDateTime ngay_nhap) {
-        this.ngay_nhap = ngay_nhap;
+    public void setNgayNhap(Date NgayNhap) {
+        this.NgayNhap = NgayNhap;
     }
 
-    public float getTong_tien() {
-        return tong_tien;
+    public double getTongTien() {
+        return TongTien;
     }
 
-    public void setTong_tien(float tong_tien) {
-        this.tong_tien = tong_tien;
+    public void setTongTien(double TongTien) {
+        this.TongTien = TongTien;
     }
 }

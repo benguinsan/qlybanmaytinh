@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTO;
+import java.util.Date;
 
 /**
  *
@@ -10,51 +11,61 @@ package DTO;
  */
 public class SanphamDTO {
 
-    private int ma_sp;
-    private String ten_sp;
-    private int ma_loai;
-    private float don_gia;
-    
+    private String ma_sp;
+    private String TenSP;
+    private String ma_loai;
+    private double DonGia;
+    private Date created_at;
+
     public SanphamDTO() {
 
     }
 
-    public SanphamDTO(int ma_sp, String ten_sp, int ma_loai, float don_gia) {
+    public SanphamDTO(String ma_sp, String TenSP, String ma_loai, double DonGia, Date created_at) {
         this.ma_sp = ma_sp;
-        this.ten_sp = ten_sp;
+        this.TenSP = TenSP;
         this.ma_loai = ma_loai;
-        this.don_gia = don_gia;
+        this.DonGia = DonGia;
+        this.created_at = created_at;
     }
 
-    public int getMa_sp() {
+    public String getMa_sp() {
         return ma_sp;
     }
 
-    public void setMa_sp(int ma_sp) {
+    public void setMa_sp(String ma_sp) {
         this.ma_sp = ma_sp;
     }
 
-    public String getTen_sp() {
-        return ten_sp;
+    public String getTenSP() {
+        return TenSP;
     }
 
-    public void setTen_sp(String ten_sp) {
-        this.ten_sp = ten_sp;
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
     }
 
-    public int getMa_loai() {
+    public String getMa_loai() {
         return ma_loai;
     }
 
-    public void setMa_loai(int ma_loai) {
+    public void setMa_loai(String ma_loai) {
         this.ma_loai = ma_loai;
     }
 
-    public float getDon_gia() {
-        return don_gia;
+    public double getDonGia() {
+        return DonGia;
     }
 
-    public void setDon_gia(float don_gia) {
-        this.don_gia = don_gia;
+    public void setDonGia(double DonGia) {
+        this.DonGia = DonGia;
+    }
+
+    public java.util.Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }

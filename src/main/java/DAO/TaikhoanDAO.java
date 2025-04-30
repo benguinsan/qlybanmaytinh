@@ -11,12 +11,5 @@ import Database.DBConnection;
  * @author mrben
  */
 public class TaikhoanDAO {
-    private DBConnection db;
-    
-    public TaikhoanDAO(){
-        db = new DBConnection();
-    }
-    
-    
-    
+ 
 }

@@ -6,10 +6,9 @@ package DAO;
 
 import DTO.NhanvienDTO;
 import Database.DBConnection;
-import Utility.CustomLogger;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.logging.Level;
+
 
 /**
  *
@@ -45,5 +44,53 @@ public class NhanvienDAO {
         }
         return listTmp;
     }
-    
+
+    public boolean Add(NhanvienDTO nv) {
+        try {
+            String sql = "INSERT INTO nhan_vien(ma_nhan_vien, ho_ten, gioi_tinh, ngay_sinh, dia_chi, dien_thoai, email, created_at) VALUES (";
+            sql += "'" + nv.getMa_nhan_vien() + "',";
+            sql += "'" + nv.getHo_ten() + "',";
+            sql += "'" + nv.getGioi_tinh() + "',";
+            sql += "'" + new java.sql.Date(nv.getNgay_sinh().getTime()) + "',";
+            sql += "'" + nv.getDia_chi() + "',";
+            sql += "'" + nv.getDien_thoai() + "',";
+            sql += "'" + nv.getEmail() + "',";
+            sql += "'" + new java.sql.Date(nv.getCreated_at().getTime()) + "')";
+            db.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in file: NhanvienDAO.java");
+            return false;
+        }
+    }
+
+    public boolean Set(NhanvienDTO nv) {
+        try {
+            String sql = "UPDATE nhan_vien SET ";
+            sql += "ho_ten = '" + nv.getHo_ten() + "',";
+            sql += "gioi_tinh = '" + nv.getGioi_tinh() + "',";
+            sql += "ngay_sinh = '" + new java.sql.Date(nv.getNgay_sinh().getTime()) + "',";
+            sql += "dia_chi = '" + nv.getDia_chi() + "',";
+            sql += "dien_thoai = '" + nv.getDien_thoai() + "',";
+            sql += "email = '" + nv.getEmail() + "',";
+            sql += "created_at = '" + new java.sql.Date(nv.getCreated_at().getTime()) + "'";
+            sql += "WHERE ma_nhan_vien = '" + nv.getMa_nhan_vien() + "'";
+            db.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in file: NhanvienDAO.java");
+            return false;
+        }
+    }
+
+    public boolean Delete(String ma_nhan_vien) {
+        try {
+            String sql = "DELETE FROM nhan_vien WHERE ma_nhan_vien = '" + ma_nhan_vien + "'";
+            db.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in file: NhanvienDAO.java");
+            return false;
+        }
+    }
 }
