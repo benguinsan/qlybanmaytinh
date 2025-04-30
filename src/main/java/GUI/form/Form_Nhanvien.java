@@ -4,21 +4,31 @@
  */
 package GUI.form;
 
+import BUS.NhanvienBUS;
+import DTO.NhanvienDTO;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mrben
  */
 public class Form_Nhanvien extends javax.swing.JPanel {
-
+    public NhanvienBUS nhanvienBUS;
     /**
      * Creates new form Form_Nhanvien
      */
     public Form_Nhanvien() {
         initComponents();
+        nhanvienBUS = new NhanvienBUS();
+        
+        loadNhanvienTable();
     }
     
     public void addPlaceHolderStyle(JTextField jtf) {
@@ -52,7 +62,7 @@ public class Form_Nhanvien extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mainTbl = new javax.swing.JTable();
+        nhanvienTbl = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -155,19 +165,17 @@ public class Form_Nhanvien extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainTbl.setModel(new javax.swing.table.DefaultTableModel(
+        nhanvienTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -190,13 +198,13 @@ public class Form_Nhanvien extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        mainTbl.setColumnSelectionAllowed(true);
-        mainTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+        nhanvienTbl.setColumnSelectionAllowed(true);
+        nhanvienTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mainTblClicked(evt);
+                nhanvienTblClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(mainTbl);
+        jScrollPane1.setViewportView(nhanvienTbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -219,7 +227,40 @@ public class Form_Nhanvien extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    private void loadNhanvienTable() {
+        DefaultTableModel model = (DefaultTableModel) nhanvienTbl.getModel();
+        model.setRowCount(0); // Xóa tất cả dữ liệu hiện có
 
+        ArrayList<NhanvienDTO> listNhanvien = nhanvienBUS.getList();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (NhanvienDTO nv : listNhanvien) {
+            String ngaySinh = "";
+            if (nv.getNgay_sinh() != null) {
+                ngaySinh = dateFormat.format(nv.getNgay_sinh());
+            }
+
+            model.addRow(new Object[] {
+                    nv.getMa_nhan_vien(),
+                    nv.getHo_ten(),
+                    nv.getGioi_tinh(),
+                    ngaySinh,
+                    nv.getDien_thoai(),
+                    nv.getEmail()
+            });
+        }
+
+        // Tạo renderer để căn giữa nội dung trong các cột
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        nhanvienTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+    }
+    
+    
     private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_reloadBtnMouseClicked
@@ -259,9 +300,9 @@ public class Form_Nhanvien extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_infoBtnMouseClicked
 
-    private void mainTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTblClicked
+    private void nhanvienTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nhanvienTblClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_mainTblClicked
+    }//GEN-LAST:event_nhanvienTblClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -271,7 +312,7 @@ public class Form_Nhanvien extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jtf_search;
-    private javax.swing.JTable mainTbl;
+    private javax.swing.JTable nhanvienTbl;
     private javax.swing.JButton reloadBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables

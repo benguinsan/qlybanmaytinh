@@ -4,7 +4,7 @@
  */
 package DTO;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -12,62 +12,62 @@ import java.time.LocalDateTime;
  */
 public class HoaDonDTO {
 
-  
-    private int ma_hoa_don;
-    private LocalDateTime ngay_lap;
-    private float tong_tien;
-    private int ma_nv;
-    private int ma_khach_hang;
-    
+    private String ma_hd;
+    private Date ngay_lap;
+    private String ma_nhan_vien;
+    private String ma_khach_hang;
+    private double tong_tien;
+
     public HoaDonDTO() {
-     
+
     }
-    
-    public HoaDonDTO(int ma_hoa_don, LocalDateTime ngay_lap, float tong_tien, int ma_nv, int ma_khach_hang) {
-        this.ma_hoa_don = ma_hoa_don;
+
+    public HoaDonDTO(String ma_hd, Date ngay_lap, String ma_nhan_vien, String ma_khach_hang, double tong_tien) {
+        this.ma_hd = ma_hd;
         this.ngay_lap = ngay_lap;
-        this.tong_tien = tong_tien;
-        this.ma_nv = ma_nv;
+        this.ma_nhan_vien = ma_nhan_vien;
         this.ma_khach_hang = ma_khach_hang;
-    }
-    
-    public int getMa_hoa_don() {
-        return ma_hoa_don;
+        this.tong_tien = tong_tien;
     }
 
-    public void setMa_hoa_don(int ma_hoa_don) {
-        this.ma_hoa_don = ma_hoa_don;
+    public String getMa_hd() {
+        return ma_hd;
     }
 
-    public LocalDateTime getNgay_lap() {
+    public void setMa_hd(String ma_hd) {
+        this.ma_hd = ma_hd;
+    }
+
+    public Date getNgay_lap() {
         return ngay_lap;
     }
 
-    public void setNgay_lap(LocalDateTime ngay_lap) {
+    public void setNgay_lap(Date ngay_lap) {
         this.ngay_lap = ngay_lap;
     }
 
-    public float getTong_tien() {
-        return tong_tien;
+    public String getMa_nhan_vien() {
+        return ma_nhan_vien;
     }
 
-    public void setTong_tien(float tong_tien) {
-        this.tong_tien = tong_tien;
+    public void setMa_nhan_vien(String ma_nhan_vien) {
+        this.ma_nhan_vien = ma_nhan_vien;
     }
 
-    public int getMa_nv() {
-        return ma_nv;
-    }
-
-    public void setMa_nv(int ma_nv) {
-        this.ma_nv = ma_nv;
-    }
-
-    public int getMa_khach_hang() {
+    public String getMa_khach_hang() {
         return ma_khach_hang;
     }
 
-    public void setMa_khach_hang(int ma_khach_hang) {
+    public void setMa_khach_hang(String ma_khach_hang) {
         this.ma_khach_hang = ma_khach_hang;
     }
+
+    public double getTong_tien() {
+        return tong_tien;
+    }
+
+    public void setTong_tien(double tong_tien) {
+        this.tong_tien = tong_tien;
+    }
+
 }

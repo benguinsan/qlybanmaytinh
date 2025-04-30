@@ -11,21 +11,23 @@ package DTO;
 public class ChiTietPhieuNhapDTO {
 
     private int ma_ctpn;
-    private int so_luong;
-    private float don_gia_nhap;
-    private float thanhtien;
+    private String ma_pn;
+    private String ma_sp;
+    private int SoLuong;
+    private double DonGia;
 
     public ChiTietPhieuNhapDTO() {
-     
+
     }
-    
-    public ChiTietPhieuNhapDTO(int ma_ctpn, int so_luong, float don_gia_nhap, float thanhtien) {
+
+    public ChiTietPhieuNhapDTO(int ma_ctpn, String ma_pn, String ma_sp, int SoLuong, double DonGia) {
         this.ma_ctpn = ma_ctpn;
-        this.so_luong = so_luong;
-        this.don_gia_nhap = don_gia_nhap;
-        this.thanhtien = thanhtien;
+        this.ma_pn = ma_pn;
+        this.ma_sp = ma_sp;
+        this.SoLuong = SoLuong;
+        this.DonGia = DonGia;
     }
-    
+
     public int getMa_ctpn() {
         return ma_ctpn;
     }
@@ -34,28 +36,36 @@ public class ChiTietPhieuNhapDTO {
         this.ma_ctpn = ma_ctpn;
     }
 
-    public int getSo_luong() {
-        return so_luong;
+    public String getMa_pn() {
+        return ma_pn;
     }
 
-    public void setSo_luong(int so_luong) {
-        this.so_luong = so_luong;
+    public void setMa_pn(String ma_pn) {
+        this.ma_pn = ma_pn;
     }
 
-    public float getDon_gia_nhap() {
-        return don_gia_nhap;
+    public String getMa_sp() {
+        return ma_sp;
     }
 
-    public void setDon_gia_nhap(float don_gia_nhap) {
-        this.don_gia_nhap = don_gia_nhap;
+    public void setMa_sp(String ma_sp) {
+        this.ma_sp = ma_sp;
     }
 
-    public float getThanhtien() {
-        return thanhtien;
+    public int getSoLuong() {
+        return SoLuong;
     }
 
-    public void setThanhtien(float thanhtien) {
-        this.thanhtien = thanhtien;
+    public void setSoLuong(int SoLuong) {
+        this.SoLuong = SoLuong;
+    }
+
+    public double getDonGia() {
+        return DonGia;
+    }
+
+    public void setDonGia(double DonGia) {
+        this.DonGia = DonGia;
     }
     
 }

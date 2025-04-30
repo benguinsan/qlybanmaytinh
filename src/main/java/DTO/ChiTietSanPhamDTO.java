@@ -11,35 +11,42 @@ package DTO;
 public class ChiTietSanPhamDTO {
 
     private int ma_chi_tiet;
+    private String ma_sp;
     private String chip;
-    private String ram;
-    private String o_cung;
-    private String hang;
     private String card;
-    private String mota;
-    private int ma_sp;
-    
+    private String ram;
+    private double gia_ban;
+    private int so_luong_ton;
+
     public ChiTietSanPhamDTO() {
 
     }
-    
-    public ChiTietSanPhamDTO(int ma_chi_tiet, String chip, String ram, String o_cung, String hang, String card, String mota, int ma_sp) {
+
+    public ChiTietSanPhamDTO(int ma_chi_tiet, String ma_sp, String chip, String card, String ram, double gia_ban,
+            int so_luong_ton) {
         this.ma_chi_tiet = ma_chi_tiet;
-        this.chip = chip;
-        this.ram = ram;
-        this.o_cung = o_cung;
-        this.hang = hang;
-        this.card = card;
-        this.mota = mota;
         this.ma_sp = ma_sp;
+        this.chip = chip;
+        this.card = card;
+        this.ram = ram;
+        this.gia_ban = gia_ban;
+        this.so_luong_ton = so_luong_ton;
     }
-    
+
     public int getMa_chi_tiet() {
         return ma_chi_tiet;
     }
 
     public void setMa_chi_tiet(int ma_chi_tiet) {
         this.ma_chi_tiet = ma_chi_tiet;
+    }
+
+    public String getMa_sp() {
+        return ma_sp;
+    }
+
+    public void setMa_sp(String ma_sp) {
+        this.ma_sp = ma_sp;
     }
 
     public String getChip() {
@@ -50,30 +57,6 @@ public class ChiTietSanPhamDTO {
         this.chip = chip;
     }
 
-    public String getRam() {
-        return ram;
-    }
-
-    public void setRam(String ram) {
-        this.ram = ram;
-    }
-
-    public String getO_cung() {
-        return o_cung;
-    }
-
-    public void setO_cung(String o_cung) {
-        this.o_cung = o_cung;
-    }
-
-    public String getHang() {
-        return hang;
-    }
-
-    public void setHang(String hang) {
-        this.hang = hang;
-    }
-
     public String getCard() {
         return card;
     }
@@ -82,19 +65,27 @@ public class ChiTietSanPhamDTO {
         this.card = card;
     }
 
-    public String getMota() {
-        return mota;
+    public String getRam() {
+        return ram;
     }
 
-    public void setMota(String mota) {
-        this.mota = mota;
+    public void setRam(String ram) {
+        this.ram = ram;
     }
 
-    public int getMa_sp() {
-        return ma_sp;
+    public double getGia_ban() {
+        return gia_ban;
     }
 
-    public void setMa_sp(int ma_sp) {
-        this.ma_sp = ma_sp;
+    public void setGia_ban(double gia_ban) {
+        this.gia_ban = gia_ban;
+    }
+
+    public int getSo_luong_ton() {
+        return so_luong_ton;
+    }
+
+    public void setSo_luong_ton(int so_luong_ton) {
+        this.so_luong_ton = so_luong_ton;
     }
 }

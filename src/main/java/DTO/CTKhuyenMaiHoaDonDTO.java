@@ -10,54 +10,63 @@ package DTO;
  */
 public class CTKhuyenMaiHoaDonDTO {
 
-    private int ma_kmhd;
-    private float so_tien;
-    private float phan_tram_giam;
-    private int ma_ctkm;
-    
+    private String ma_kmhd;
+    private String ma_ctkm;
+    private double SoTienToiThieu;
+    private double PhanTramGiamGia;
+    private double SoTienGiamToiDa;
+
     public CTKhuyenMaiHoaDonDTO() {
-       
+
     }
 
-    
-    public CTKhuyenMaiHoaDonDTO(int ma_kmhd, float so_tien, float phan_tram_giam, int ma_ctkm) {
+    public CTKhuyenMaiHoaDonDTO(String ma_kmhd, String ma_ctkm, double SoTienToiThieu, double PhanTramGiamGia,
+            double SoTienGiamToiDa) {
         this.ma_kmhd = ma_kmhd;
-        this.so_tien = so_tien;
-        this.phan_tram_giam = phan_tram_giam;
         this.ma_ctkm = ma_ctkm;
+        this.SoTienToiThieu = SoTienToiThieu;
+        this.PhanTramGiamGia = PhanTramGiamGia;
+        this.SoTienGiamToiDa = SoTienGiamToiDa;
     }
 
-    
-    public int getMa_kmhd() {
+    public String getMa_kmhd() {
         return ma_kmhd;
     }
 
-    public void setMa_kmhd(int ma_kmhd) {
+    public void setMa_kmhd(String ma_kmhd) {
         this.ma_kmhd = ma_kmhd;
     }
 
-    public float getSo_tien() {
-        return so_tien;
-    }
-
-    public void setSo_tien(float so_tien) {
-        this.so_tien = so_tien;
-    }
-
-    public float getPhan_tram_giam() {
-        return phan_tram_giam;
-    }
-
-    public void setPhan_tram_giam(float phan_tram_giam) {
-        this.phan_tram_giam = phan_tram_giam;
-    }
-
-    public int getMa_ctkm() {
+    public String getMa_ctkm() {
         return ma_ctkm;
     }
 
-    public void setMa_ctkm(int ma_ctkm) {
+    public void setMa_ctkm(String ma_ctkm) {
         this.ma_ctkm = ma_ctkm;
     }
-    
+
+    public double getSoTienToiThieu() {
+        return SoTienToiThieu;
+    }
+
+    public void setSoTienToiThieu(double SoTienToiThieu) {
+        this.SoTienToiThieu = SoTienToiThieu;
+    }
+
+    public double getPhanTramGiamGia() {
+        return PhanTramGiamGia;
+    }
+
+    public void setPhanTramGiamGia(double PhanTramGiamGia) {
+        this.PhanTramGiamGia = PhanTramGiamGia;
+    }
+
+    public double getSoTienGiamToiDa() {
+        return SoTienGiamToiDa;
+    }
+
+    public void setSoTienGiamToiDa(double SoTienGiamToiDa) {
+        this.SoTienGiamToiDa = SoTienGiamToiDa;
+    }
+
 }
