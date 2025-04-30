@@ -12,6 +12,9 @@ import GUI.form.Form_Nhacungcap;
 import GUI.form.Form_Phieunhap;
 import GUI.form.Form_Khachhang;
 import GUI.form.Form_Nhanvien;
+import GUI.form.Form_HoaDon;
+import GUI.form.Form_Khuyenmai;
+import GUI.form.Form_ThongKe;
 
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -32,6 +35,9 @@ public class MainForm extends javax.swing.JFrame {
     private Form_Nhacungcap nhacungcap;
     private Form_Khachhang khachhang;
     private Form_Nhanvien nhanvien;
+    private Form_HoaDon hoadon;
+    private Form_ThongKe thongke;
+    private Form_Khuyenmai khuyenmai;
 
   
     public MainForm() {
@@ -45,6 +51,10 @@ public class MainForm extends javax.swing.JFrame {
         nhacungcap = new Form_Nhacungcap();
         khachhang = new Form_Khachhang();
         nhanvien = new Form_Nhanvien();
+        hoadon = new Form_HoaDon();
+        thongke = new Form_ThongKe();
+        khuyenmai = new Form_Khuyenmai();
+        
        
         menu.initMoving(MainForm.this);
         menu.addEventMenuSelected(new EventMenuSelected(){
@@ -64,7 +74,13 @@ public class MainForm extends javax.swing.JFrame {
                     setForm(khachhang);
                 } else if (index == 6) {
                     setForm(nhanvien);
-                }
+                } else if (index == 7) {
+                    setForm(hoadon);
+                } else if (index == 8) {
+                    setForm(thongke);
+                } else if (index == 9) {
+                    setForm(khuyenmai);
+                } 
             }
         });
         setForm(new Form_Home());
