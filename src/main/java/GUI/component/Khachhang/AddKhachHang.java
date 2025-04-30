@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI.component;
+package GUI.component.Khachhang;
 
 /**
  *
  * @author mrben
  */
-public class AddNhanVien extends javax.swing.JPanel {
+public class AddKhachHang extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddNhanVien
+     * Creates new form AddKhachHang
      */
-    public AddNhanVien() {
+    public AddKhachHang() {
         initComponents();
     }
 
@@ -30,11 +30,11 @@ public class AddNhanVien extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 449, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
