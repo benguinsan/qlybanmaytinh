@@ -4,21 +4,30 @@
  */
 package GUI.form;
 
+import BUS.KhachhangBUS;
+import DTO.KhachhangDTO;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mrben
  */
 public class Form_Khachhang extends javax.swing.JPanel {
-
+    public KhachhangBUS khachHangBUS;
     /**
      * Creates new form Form_Khachhang
      */
     public Form_Khachhang() {
         initComponents();
+        khachHangBUS = new KhachhangBUS();
+
+        loadDataIntoKhachHangTbl();
     }
     
     public void addPlaceHolderStyle(JTextField jtf) {
@@ -53,7 +62,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mainTbl = new javax.swing.JTable();
+        khachhangTbl = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -166,7 +175,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainTbl.setModel(new javax.swing.table.DefaultTableModel(
+        khachhangTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -189,13 +198,13 @@ public class Form_Khachhang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        mainTbl.setColumnSelectionAllowed(true);
-        mainTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+        khachhangTbl.setColumnSelectionAllowed(true);
+        khachhangTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mainTblClicked(evt);
+                khachhangTblClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(mainTbl);
+        jScrollPane1.setViewportView(khachhangTbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -218,7 +227,31 @@ public class Form_Khachhang extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    public void loadDataIntoKhachHangTbl() {
+        this.khachHangBUS.ListKhachhang();
+        DefaultTableModel model = (DefaultTableModel) khachhangTbl.getModel();
+        model.setRowCount(0);
+        ArrayList<KhachhangDTO> ListKhachhang = khachHangBUS.getList();
 
+        for (int i = 0; i < ListKhachhang.size(); i++) {
+            Object[] row = new Object[5];
+            row[0] = ListKhachhang.get(i).getMa_khach_hang();
+            row[1] = ListKhachhang.get(i).getHo_ten();
+            row[2] = ListKhachhang.get(i).getDia_chi();
+            row[3] = ListKhachhang.get(i).getDien_thoai();
+            row[4] = ListKhachhang.get(i).getCreated_at();
+            model.addRow(row);
+        }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        khachhangTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        khachhangTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        khachhangTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+
+    }
+    
+    
     private void jtf_searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchFocusGained
         if (jtf_search.getText().equals("Search by ID/name")) {
             jtf_search.setText(null);
@@ -258,9 +291,9 @@ public class Form_Khachhang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_addBtnMouseClicked
 
-    private void mainTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTblClicked
+    private void khachhangTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_khachhangTblClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_mainTblClicked
+    }//GEN-LAST:event_khachhangTblClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -271,7 +304,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jtf_search;
-    private javax.swing.JTable mainTbl;
+    private javax.swing.JTable khachhangTbl;
     private javax.swing.JButton reloadBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables

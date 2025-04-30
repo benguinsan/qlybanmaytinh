@@ -28,14 +28,15 @@ public class KhachhangDAO {
             KhachhangDTO tmp;
             while (rs.next()) {
                 tmp = new KhachhangDTO();
-                tmp.setMa_khach_hang(rs.getInt("ma_khach_hang"));
+                tmp.setMa_khach_hang(rs.getString("ma_khach_hang"));
                 tmp.setHo_ten(rs.getString("ho_ten"));
-                tmp.setDien_thoai(rs.getInt("dien_thoai"));
+                tmp.setDien_thoai(rs.getString("dien_thoai"));
                 tmp.setDia_chi(rs.getString("dia_chi"));
+                tmp.setCreated_at(rs.getDate("created_at"));
                 listTmp.add(tmp);
             }
         } catch (Exception ex) {
-            System.out.println("Error in file: NhanvienDAO.java");
+            System.out.println("Error in file: KhachHangDAO.java");
         }
         return listTmp;
     }

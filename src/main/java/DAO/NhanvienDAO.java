@@ -17,11 +17,11 @@ import java.util.logging.Level;
  */
 public class NhanvienDAO {
     private DBConnection db;
-     
-    public NhanvienDAO(){
+
+    public NhanvienDAO() {
         db = new DBConnection();
     }
-    
+
     public ArrayList<NhanvienDTO> getAllNhanvien() {
         ArrayList<NhanvienDTO> listTmp = new ArrayList<NhanvienDTO>();
         String sql = "SELECT * FROM nhan_vien";
@@ -30,10 +30,14 @@ public class NhanvienDAO {
             NhanvienDTO tmp;
             while (rs.next()) {
                 tmp = new NhanvienDTO();
-                tmp.setMa_nv(rs.getInt("ma_nv"));
+                tmp.setMa_nhan_vien(rs.getString("ma_nhan_vien"));
                 tmp.setHo_ten(rs.getString("ho_ten"));
-                tmp.setMa_tai_khoan(rs.getInt("ma_tai_khoan"));
-                tmp.setLuong(rs.getFloat("luong"));
+                tmp.setGioi_tinh(rs.getString("gioi_tinh"));
+                tmp.setNgay_sinh(rs.getDate("ngay_sinh"));
+                tmp.setDia_chi(rs.getString("dia_chi"));
+                tmp.setDien_thoai(rs.getString("dien_thoai"));
+                tmp.setEmail(rs.getString("email"));
+                tmp.setCreated_at(rs.getDate("created_at"));
                 listTmp.add(tmp);
             }
         } catch (Exception ex) {
@@ -41,4 +45,5 @@ public class NhanvienDAO {
         }
         return listTmp;
     }
+    
 }

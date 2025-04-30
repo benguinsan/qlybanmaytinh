@@ -4,34 +4,45 @@
  */
 package DTO;
 
+import java.util.Date;
+
 /**
  *
  * @author mrben
  */
 public class NhanvienDTO {
 
-    private int ma_nv;
+    private String ma_nhan_vien;
     private String ho_ten;
-    private float  luong;
-    private int ma_tai_khoan;
-    
+    private String gioi_tinh;
+    private Date ngay_sinh;
+    private String dia_chi;
+    private String dien_thoai;
+    private String email;
+    private Date created_at;
+
     public NhanvienDTO() {
 
     }
-    
-    public NhanvienDTO(int ma_nv, String ho_ten, float luong, int ma_tai_khoan) {
-        this.ma_nv = ma_nv;
+
+    public NhanvienDTO(String ma_nhan_vien, String ho_ten, String gioi_tinh, Date ngay_sinh,
+            String dia_chi, String dien_thoai, String email, Date created_at) {
+        this.ma_nhan_vien = ma_nhan_vien;
         this.ho_ten = ho_ten;
-        this.luong = luong;
-        this.ma_tai_khoan = ma_tai_khoan;
-    }
-    
-    public int getMa_nv() {
-        return ma_nv;
+        this.gioi_tinh = gioi_tinh;
+        this.ngay_sinh = ngay_sinh;
+        this.dia_chi = dia_chi;
+        this.dien_thoai = dien_thoai;
+        this.email = email;
+        this.created_at = created_at;
     }
 
-    public void setMa_nv(int ma_nv) {
-        this.ma_nv = ma_nv;
+    public String getMa_nhan_vien() {
+        return ma_nhan_vien;
+    }
+
+    public void setMa_nhan_vien(String ma_nhan_vien) {
+        this.ma_nhan_vien = ma_nhan_vien;
     }
 
     public String getHo_ten() {
@@ -42,19 +53,51 @@ public class NhanvienDTO {
         this.ho_ten = ho_ten;
     }
 
-    public float getLuong() {
-        return luong;
+    public String getGioi_tinh() {
+        return gioi_tinh;
     }
 
-    public void setLuong(float luong) {
-        this.luong = luong;
+    public void setGioi_tinh(String gioi_tinh) {
+        this.gioi_tinh = gioi_tinh;
     }
 
-    public int getMa_tai_khoan() {
-        return ma_tai_khoan;
+    public Date getNgay_sinh() {
+        return ngay_sinh;
     }
 
-    public void setMa_tai_khoan(int ma_tai_khoan) {
-        this.ma_tai_khoan = ma_tai_khoan;
+    public void setNgay_sinh(Date ngay_sinh) {
+        this.ngay_sinh = ngay_sinh;
+    }
+
+    public String getDia_chi() {
+        return dia_chi;
+    }
+
+    public void setDia_chi(String dia_chi) {
+        this.dia_chi = dia_chi;
+    }
+
+    public String getDien_thoai() {
+        return dien_thoai;
+    }
+
+    public void setDien_thoai(String dien_thoai) {
+        this.dien_thoai = dien_thoai;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
