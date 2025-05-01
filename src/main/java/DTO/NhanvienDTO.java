@@ -20,13 +20,14 @@ public class NhanvienDTO {
     private String dien_thoai;
     private String email;
     private Date created_at;
+    private int trang_thai;
 
     public NhanvienDTO() {
 
     }
 
     public NhanvienDTO(String ma_nhan_vien, String ho_ten, String gioi_tinh, Date ngay_sinh,
-            String dia_chi, String dien_thoai, String email, Date created_at) {
+            String dia_chi, String dien_thoai, String email, Date created_at, int trang_thai) {
         this.ma_nhan_vien = ma_nhan_vien;
         this.ho_ten = ho_ten;
         this.gioi_tinh = gioi_tinh;
@@ -35,6 +36,7 @@ public class NhanvienDTO {
         this.dien_thoai = dien_thoai;
         this.email = email;
         this.created_at = created_at;
+        this.trang_thai = trang_thai;
     }
 
     public String getMa_nhan_vien() {
@@ -99,5 +101,13 @@ public class NhanvienDTO {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public int getTrang_thai() {
+        return trang_thai;
+    }
+
+    public void setTrang_thai(int trang_thai) {
+        this.trang_thai = trang_thai;
     }
 }

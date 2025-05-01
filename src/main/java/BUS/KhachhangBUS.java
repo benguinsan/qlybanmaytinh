@@ -96,4 +96,14 @@ public class KhachhangBUS {
         }
         return result;
     }
+
+    // Tìm khách hàng theo mã khách hàng
+    public KhachhangDTO getKhachhangByMaKH(String maKH) {
+        for (KhachhangDTO kh : this.listKhachhang) {
+            if (kh.getMa_khach_hang().equals(maKH)) {
+                return kh;
+            }
+        }
+        return null;
+    }
 }

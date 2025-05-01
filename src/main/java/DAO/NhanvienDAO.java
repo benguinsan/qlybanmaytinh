@@ -9,7 +9,6 @@ import Database.DBConnection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author mrben
@@ -23,7 +22,7 @@ public class NhanvienDAO {
 
     public ArrayList<NhanvienDTO> getAllNhanvien() {
         ArrayList<NhanvienDTO> listTmp = new ArrayList<NhanvienDTO>();
-        String sql = "SELECT * FROM nhan_vien";
+        String sql = "SELECT * FROM nhan_vien WHERE trang_thai = 1";
         try {
             ResultSet rs = db.executeQuery(sql);
             NhanvienDTO tmp;
@@ -37,6 +36,7 @@ public class NhanvienDAO {
                 tmp.setDien_thoai(rs.getString("dien_thoai"));
                 tmp.setEmail(rs.getString("email"));
                 tmp.setCreated_at(rs.getDate("created_at"));
+                tmp.setTrang_thai(rs.getInt("trang_thai"));
                 listTmp.add(tmp);
             }
         } catch (Exception ex) {
@@ -47,7 +47,7 @@ public class NhanvienDAO {
 
     public boolean Add(NhanvienDTO nv) {
         try {
-            String sql = "INSERT INTO nhan_vien(ma_nhan_vien, ho_ten, gioi_tinh, ngay_sinh, dia_chi, dien_thoai, email, created_at) VALUES (";
+            String sql = "INSERT INTO nhan_vien(ma_nhan_vien, ho_ten, gioi_tinh, ngay_sinh, dia_chi, dien_thoai, email, created_at, trang_thai) VALUES (";
             sql += "'" + nv.getMa_nhan_vien() + "',";
             sql += "'" + nv.getHo_ten() + "',";
             sql += "'" + nv.getGioi_tinh() + "',";
@@ -55,7 +55,8 @@ public class NhanvienDAO {
             sql += "'" + nv.getDia_chi() + "',";
             sql += "'" + nv.getDien_thoai() + "',";
             sql += "'" + nv.getEmail() + "',";
-            sql += "'" + new java.sql.Date(nv.getCreated_at().getTime()) + "')";
+            sql += "'" + new java.sql.Date(nv.getCreated_at().getTime()) + "',";
+            sql += "1)";
             db.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -73,8 +74,9 @@ public class NhanvienDAO {
             sql += "dia_chi = '" + nv.getDia_chi() + "',";
             sql += "dien_thoai = '" + nv.getDien_thoai() + "',";
             sql += "email = '" + nv.getEmail() + "',";
-            sql += "created_at = '" + new java.sql.Date(nv.getCreated_at().getTime()) + "'";
-            sql += "WHERE ma_nhan_vien = '" + nv.getMa_nhan_vien() + "'";
+            sql += "created_at = '" + new java.sql.Date(nv.getCreated_at().getTime()) + "',";
+            sql += "trang_thai = " + nv.getTrang_thai();
+            sql += " WHERE ma_nhan_vien = '" + nv.getMa_nhan_vien() + "'";
             db.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -85,7 +87,7 @@ public class NhanvienDAO {
 
     public boolean Delete(String ma_nhan_vien) {
         try {
-            String sql = "DELETE FROM nhan_vien WHERE ma_nhan_vien = '" + ma_nhan_vien + "'";
+            String sql = "UPDATE nhan_vien SET trang_thai = 0 WHERE ma_nhan_vien = '" + ma_nhan_vien + "'";
             db.executeUpdate(sql);
             return true;
         } catch (Exception e) {
