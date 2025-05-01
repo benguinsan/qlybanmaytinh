@@ -22,7 +22,7 @@ public class NhanvienDAO {
 
     public ArrayList<NhanvienDTO> getAllNhanvien() {
         ArrayList<NhanvienDTO> listTmp = new ArrayList<NhanvienDTO>();
-        String sql = "SELECT * FROM nhan_vien WHERE trang_thai = 1";
+        String sql = "SELECT * FROM nhan_vien WHERE trang_thai = 1 ORDER BY created_at ASC";
         try {
             ResultSet rs = db.executeQuery(sql);
             NhanvienDTO tmp;

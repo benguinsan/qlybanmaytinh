@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 public class AddUpdateNVForm extends javax.swing.JFrame {
     public NhanvienBUS nhanvienBUS;
 
+    public boolean isUpdateMode = false;
+    private String maNhanVienForUpdate = null;
+
     /**
      * Creates new form AddUpdateNVForm
      */
@@ -223,6 +226,32 @@ public class AddUpdateNVForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_txt_emailActionPerformed
 
+    public void disableFieldForUpdate() {
+        // mã nhân viên
+        txt_manv.setEditable(false);
+        txt_manv.setBackground(new java.awt.Color(240, 240, 240));
+        
+        //ngày sinh
+        NgaySinhPicker.setEnabled(false);
+        NgaySinhPicker.setBackground(new java.awt.Color(240, 240, 240));
+    }
+
+    public void setDataForUpdate(NhanvienDTO nv) {
+        if (nv != null) {
+            isUpdateMode = true;
+            maNhanVienForUpdate = nv.getMa_nhan_vien();
+
+            // Đổ dữ liệu vào các trường
+            txt_manv.setText(nv.getMa_nhan_vien());
+            txt_tenkh.setText(nv.getHo_ten());
+            txt_diachi.setText(nv.getDia_chi());
+            txt_sdt.setText(nv.getDien_thoai());
+            cbGioiTinh.setSelectedItem(nv.getGioi_tinh());
+            NgaySinhPicker.setDate(nv.getNgay_sinh());
+            txt_email.setText(nv.getEmail());
+        }
+    }
+
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveBtnActionPerformed
         // Kiểm tra dữ liệu nhập vào
         if (validateInput()) {
@@ -236,37 +265,70 @@ public class AddUpdateNVForm extends javax.swing.JFrame {
                 String dienThoai = txt_sdt.getText().trim();
                 String email = txt_email.getText().trim();
 
-                // Tạo đối tượng NhanvienDTO
-                NhanvienDTO nv = new NhanvienDTO();
-                nv.setMa_nhan_vien(maNV);
-                nv.setHo_ten(hoTen);
-                nv.setGioi_tinh(gioiTinh);
-                nv.setNgay_sinh(ngaySinh);
-                nv.setDia_chi(diaChi);
-                nv.setDien_thoai(dienThoai);
-                nv.setEmail(email);
-                nv.setCreated_at(new Date()); // Ngày hiện tại
-                nv.setTrang_thai(1); // Mặc định là hoạt động
+                if(isUpdateMode){
+                    NhanvienDTO nvCurrent = nhanvienBUS.getNhanvienByMaNV(maNV);
 
-                // Thêm nhân viên thông qua BUS
+                    if(nvCurrent != null){
+                        // Cập nhật nhân viên
+                        nvCurrent.setHo_ten(hoTen);
+                        nvCurrent.setGioi_tinh(gioiTinh);
+                        nvCurrent.setDia_chi(diaChi);
+                        nvCurrent.setDien_thoai(dienThoai);
+                        nvCurrent.setEmail(email);
 
-                boolean success = nhanvienBUS.AddNhanVien(nv);
+                        boolean success = nhanvienBUS.SetNhanVien(nvCurrent);
 
-                if (success) {
-                    JOptionPane.showMessageDialog(
+                        if(success){
+                            JOptionPane.showMessageDialog(
+                                this,
+                                "Cập nhật nhân viên thành công!",
+                                "Thông báo",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                            this.dispose();
+                        }else{
+                            JOptionPane.showMessageDialog(
+                                this,
+                                "Cập nhật nhân viên thất bại!",
+                                "Lỗi",
+                                JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Không tìm thấy thông tin nhân viên!",
+                            "Lỗi",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    // Tạo đối tượng NhanvienDTO
+                    NhanvienDTO nv = new NhanvienDTO();
+                    nv.setMa_nhan_vien(maNV);
+                    nv.setHo_ten(hoTen);
+                    nv.setGioi_tinh(gioiTinh);
+                    nv.setNgay_sinh(ngaySinh);
+                    nv.setDia_chi(diaChi);
+                    nv.setDien_thoai(dienThoai);
+                    nv.setEmail(email);
+                    nv.setCreated_at(new Date()); // Ngày hiện tại
+                    nv.setTrang_thai(1); // Mặc định là hoạt động
+
+                    // Thêm nhân viên thông qua BUS
+                    boolean success = nhanvienBUS.AddNhanVien(nv);
+
+                    if (success) {
+                        JOptionPane.showMessageDialog(
                             this,
                             "Thêm nhân viên thành công!",
                             "Thông báo",
                             JOptionPane.INFORMATION_MESSAGE);
-
-                    // Đóng form sau khi thêm thành công
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(
+                    } else {
+                        JOptionPane.showMessageDialog(
                             this,
                             "Thêm nhân viên thất bại!",
                             "Lỗi",
                             JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(

@@ -66,7 +66,7 @@ public class KhachhangBUS {
     }
 
     // Tìm khách hàng theo mã
-    public KhachhangDTO findByMa(String ma_khach_hang) {
+    public KhachhangDTO getKhachhangByMaKH(String ma_khach_hang) {
         for (KhachhangDTO kh : this.listKhachhang) {
             if (kh.getMa_khach_hang().equals(ma_khach_hang)) {
                 return kh;
@@ -75,35 +75,34 @@ public class KhachhangBUS {
         return null;
     }
 
-    // Tìm khách hàng theo tên
-    public ArrayList<KhachhangDTO> findByName(String ten) {
-        ArrayList<KhachhangDTO> result = new ArrayList<>();
-        for (KhachhangDTO kh : this.listKhachhang) {
-            if (kh.getHo_ten().toLowerCase().contains(ten.toLowerCase())) {
-                result.add(kh);
+
+    public ArrayList<KhachhangDTO> searchKhachhang(String keyword) {
+        ArrayList<KhachhangDTO> searchResults = new ArrayList<>();
+
+        // Chuyển từ khóa về chữ thường để tìm kiếm không phân biệt hoa thường
+        String lowerKeyword = keyword.toLowerCase();
+
+        for (KhachhangDTO kh : listKhachhang) {
+            // Tìm theo mã khách hàng
+            if (kh.getMa_khach_hang().toLowerCase().contains(lowerKeyword)) {
+                searchResults.add(kh);
+                continue;
+            }
+
+            // Tìm theo tên khách hàng
+            if (kh.getHo_ten().toLowerCase().contains(lowerKeyword)) {
+                searchResults.add(kh);
+                continue;
+            }
+
+            // Tìm theo số điện thoại
+            if (kh.getDien_thoai().contains(keyword)) {
+                searchResults.add(kh);
+                continue;
             }
         }
-        return result;
+
+        return searchResults;
     }
 
-    // Tìm khách hàng theo số điện thoại
-    public ArrayList<KhachhangDTO> findByPhone(String phone) {
-        ArrayList<KhachhangDTO> result = new ArrayList<>();
-        for (KhachhangDTO kh : this.listKhachhang) {
-            if (kh.getDien_thoai().contains(phone)) {
-                result.add(kh);
-            }
-        }
-        return result;
-    }
-
-    // Tìm khách hàng theo mã khách hàng
-    public KhachhangDTO getKhachhangByMaKH(String maKH) {
-        for (KhachhangDTO kh : this.listKhachhang) {
-            if (kh.getMa_khach_hang().equals(maKH)) {
-                return kh;
-            }
-        }
-        return null;
-    }
 }

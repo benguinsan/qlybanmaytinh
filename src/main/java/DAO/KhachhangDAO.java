@@ -22,7 +22,7 @@ public class KhachhangDAO {
 
     public ArrayList<KhachhangDTO> getAllKhachhang() {
         ArrayList<KhachhangDTO> listTmp = new ArrayList<KhachhangDTO>();
-        String sql = "SELECT * FROM khach_hang WHERE trang_thai = 1";
+        String sql = "SELECT * FROM khach_hang WHERE trang_thai = 1 ORDER BY created_at ASC";
         try {
             ResultSet rs = db.executeQuery(sql);
             KhachhangDTO tmp;

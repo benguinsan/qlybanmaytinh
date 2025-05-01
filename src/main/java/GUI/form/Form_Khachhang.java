@@ -56,7 +56,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -67,6 +67,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         khachhangTbl = new javax.swing.JTable();
 
@@ -79,7 +80,6 @@ public class Form_Khachhang extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtf_searchFocusGained(evt);
             }
-
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtf_searchFocusLost(evt);
             }
@@ -154,72 +154,73 @@ public class Form_Khachhang extends javax.swing.JPanel {
             }
         });
 
+        searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/search.png"))); // NOI18N
+        searchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        searchBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(infoBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         khachhangTbl.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Điện thoại", "Ngày tham gia"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
-                    java.lang.String.class
+            },
+            new String [] {
+                "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Điện thoại", "Ngày tham gia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         khachhangTbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -232,26 +233,40 @@ public class Form_Khachhang extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740,
-                                                Short.MAX_VALUE))
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
+        String searchText = jtf_search.getText().trim();
+    
+        // Nếu ô tìm kiếm trống hoặc chứa placeholder, hiển thị tất cả khách hàng
+        if (searchText.isEmpty() || searchText.equals("Search by ID/name")) {
+            loadDataIntoKhachHangTbl();
+            return;
+        }
+        
+        // Tìm kiếm khách hàng
+        ArrayList<KhachhangDTO> searchResults = khachHangBUS.searchKhachhang(searchText);
+        
+        // Hiển thị kết quả tìm kiếm
+        displaySearchResults(searchResults);
+    }//GEN-LAST:event_searchBtnMouseClicked
 
     public void loadDataIntoKhachHangTbl() {
         this.khachHangBUS.ListKhachhang();
@@ -293,10 +308,65 @@ public class Form_Khachhang extends javax.swing.JPanel {
     }// GEN-LAST:event_jtf_searchFocusLost
 
     private void jtf_searchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jtf_searchActionPerformed
-        // TODO add your handling code here:
+        String searchText = jtf_search.getText().trim();
+
+        // Nếu ô tìm kiếm trống hoặc chứa placeholder, hiển thị tất cả khách hàng
+        if (searchText.isEmpty() || searchText.equals("Search by ID/name")) {
+            loadDataIntoKhachHangTbl();
+            return;
+        }
+
+        // Tìm kiếm khách hàng
+        ArrayList<KhachhangDTO> searchResults = khachHangBUS.searchKhachhang(searchText);
+
+        // Hiển thị kết quả tìm kiếm
+        displaySearchResults(searchResults);
     }// GEN-LAST:event_jtf_searchActionPerformed
 
+    /**
+     * Hiển thị kết quả tìm kiếm lên bảng
+     * 
+     * @param searchResults Danh sách khách hàng tìm được
+     */
+    private void displaySearchResults(ArrayList<KhachhangDTO> searchResults) {
+        DefaultTableModel model = (DefaultTableModel) khachhangTbl.getModel();
+        model.setRowCount(0);
+
+        if (searchResults.isEmpty()) {
+            // Không tìm thấy kết quả
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Không tìm thấy khách hàng phù hợp!",
+                    "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Hiển thị kết quả tìm kiếm
+        for (KhachhangDTO kh : searchResults) {
+            Object[] row = new Object[5];
+            row[0] = kh.getMa_khach_hang();
+            row[1] = kh.getHo_ten();
+            row[2] = kh.getDia_chi();
+            row[3] = kh.getDien_thoai();
+            row[4] = kh.getCreated_at();
+            model.addRow(row);
+        }
+
+        // Căn giữa các cột
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        khachhangTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        khachhangTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        khachhangTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+    }
+
     private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_reloadBtnMouseClicked
+        // Reset ô tìm kiếm
+        addPlaceHolderStyle(jtf_search);
+        jtf_search.setText("Search by ID/name");
+
+        // Load lại dữ liệu
         loadDataIntoKhachHangTbl();
     }// GEN-LAST:event_reloadBtnMouseClicked
 
@@ -305,7 +375,44 @@ public class Form_Khachhang extends javax.swing.JPanel {
     }// GEN-LAST:event_infoBtnMouseClicked
 
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_updateBtnMouseClicked
-        // TODO add your handling code here:
+        if (selectedMaKhachHang != null) {
+            // Tạo form cập nhật
+            AddUpdateKHForm form = new AddUpdateKHForm();
+
+            // Lấy thông tin khách hàng cần cập nhật
+            KhachhangDTO kh = khachHangBUS.getKhachhangByMaKH(selectedMaKhachHang.toString());
+
+            if (kh != null) {
+                // Đổ dữ liệu vào form
+                form.setDataForUpdate(kh);
+
+                // Disable trường mã khách hàng
+                form.disableFieldForUpdate();
+
+                // Thêm WindowListener để biết khi nào form đóng
+                form.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        // Load lại dữ liệu vào bảng khi form đóng
+                        loadDataIntoKhachHangTbl();
+                    }
+                });
+
+                form.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Không tìm thấy thông tin khách hàng!",
+                        "Lỗi",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Vui lòng chọn khách hàng cần cập nhật!",
+                    "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }// GEN-LAST:event_updateBtnMouseClicked
 
     private void deleteBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_deleteBtnMouseClicked
@@ -383,6 +490,10 @@ public class Form_Khachhang extends javax.swing.JPanel {
         form.setVisible(true);
     }// GEN-LAST:event_addBtnActionPerformed
 
+    private void jtf_searchKeyReleased(java.awt.event.KeyEvent evt) {
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton deleteBtn;
@@ -393,6 +504,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
     private javax.swing.JTextField jtf_search;
     private javax.swing.JTable khachhangTbl;
     private javax.swing.JButton reloadBtn;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

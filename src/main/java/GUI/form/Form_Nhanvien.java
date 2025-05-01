@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class Form_Nhanvien extends javax.swing.JPanel {
     public NhanvienBUS nhanvienBUS;
-    private String selectedMaNhanVien = null;
+    private Object selectedMaNhanVien;
 
     /**
      * Creates new form Form_Nhanvien
@@ -56,6 +56,7 @@ public class Form_Nhanvien extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -66,6 +67,7 @@ public class Form_Nhanvien extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         nhanvienTbl = new javax.swing.JTable();
 
@@ -153,6 +155,16 @@ public class Form_Nhanvien extends javax.swing.JPanel {
             }
         });
 
+        searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/search.png"))); // NOI18N
+        searchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        searchBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,6 +187,9 @@ public class Form_Nhanvien extends javax.swing.JPanel {
                                 .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap()));
@@ -195,6 +210,9 @@ public class Form_Nhanvien extends javax.swing.JPanel {
                                         .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
@@ -252,27 +270,80 @@ public class Form_Nhanvien extends javax.swing.JPanel {
                                 .addContainerGap()));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadNhanvienTable() {
+    private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_searchBtnMouseClicked
+        String searchText = jtf_search.getText().trim();
+
+        // Nếu ô tìm kiếm trống hoặc chứa placeholder, hiển thị tất cả nhân viên
+        if (searchText.isEmpty() || searchText.equals("Search by ID/name")) {
+            loadNhanvienTable();
+            return;
+        }
+
+        // Tìm kiếm nhân viên
+        ArrayList<NhanvienDTO> searchResults = nhanvienBUS.searchNhanvien(searchText);
+
+        // Hiển thị kết quả tìm kiếm
+        displaySearchResults(searchResults);
+    }// GEN-LAST:event_searchBtnMouseClicked
+
+    /**
+     * Hiển thị kết quả tìm kiếm nhân viên trong bảng
+     * 
+     * 
+     */
+    private void displaySearchResults(ArrayList<NhanvienDTO> searchResults) {
         DefaultTableModel model = (DefaultTableModel) nhanvienTbl.getModel();
         model.setRowCount(0); // Xóa tất cả dữ liệu hiện có
 
-        ArrayList<NhanvienDTO> listNhanvien = nhanvienBUS.getList();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        for (NhanvienDTO nv : listNhanvien) {
-            String ngaySinh = "";
-            if (nv.getNgay_sinh() != null) {
-                ngaySinh = dateFormat.format(nv.getNgay_sinh());
+        if (searchResults.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Không tìm thấy nhân viên nào!",
+                    "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            for (NhanvienDTO nv : searchResults) {
+                Object[] row = new Object[6];
+                row[0] = nv.getMa_nhan_vien();
+                row[1] = nv.getHo_ten();
+                row[2] = nv.getGioi_tinh();
+                row[3] = dateFormat.format(nv.getNgay_sinh());
+                row[4] = nv.getDien_thoai();
+                row[5] = nv.getEmail();
+                model.addRow(row);
             }
+        }
 
-            model.addRow(new Object[] {
-                    nv.getMa_nhan_vien(),
-                    nv.getHo_ten(),
-                    nv.getGioi_tinh(),
-                    ngaySinh,
-                    nv.getDien_thoai(),
-                    nv.getEmail()
-            });
+        // Căn giữa các cột
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        nhanvienTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        nhanvienTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+    }
+
+    private void loadNhanvienTable() {
+        this.nhanvienBUS.ListNhanvien(); // Gọi phương thức để cập nhật danh sách từ database
+        DefaultTableModel model = (DefaultTableModel) nhanvienTbl.getModel();
+        model.setRowCount(0); // Xóa tất cả dữ liệu hiện có
+        ArrayList<NhanvienDTO> listNhanvien = nhanvienBUS.getList();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (int i = 0; i < listNhanvien.size(); i++) {
+            Object[] row = new Object[6];
+            row[0] = listNhanvien.get(i).getMa_nhan_vien();
+            row[1] = listNhanvien.get(i).getHo_ten();
+            row[2] = listNhanvien.get(i).getGioi_tinh();
+            // Định dạng ngày sinh
+            row[3] = dateFormat.format(listNhanvien.get(i).getNgay_sinh());
+            row[4] = listNhanvien.get(i).getDien_thoai();
+            row[5] = listNhanvien.get(i).getEmail();
+            model.addRow(row);
         }
 
         // Tạo renderer để căn giữa nội dung trong các cột
@@ -286,6 +357,11 @@ public class Form_Nhanvien extends javax.swing.JPanel {
     }
 
     private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_reloadBtnMouseClicked
+        // Reset search field to default state
+        jtf_search.setText("Search by ID/name");
+        addPlaceHolderStyle(jtf_search);
+
+        // Reload the table data
         loadNhanvienTable();
     }// GEN-LAST:event_reloadBtnMouseClicked
 
@@ -313,7 +389,43 @@ public class Form_Nhanvien extends javax.swing.JPanel {
     }// GEN-LAST:event_addBtnMouseClicked
 
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_updateBtnMouseClicked
-        // TODO add your handling code here:
+        if (selectedMaNhanVien != null) {
+            AddUpdateNVForm form = new AddUpdateNVForm();
+
+            // Lấy thông tin khách hàng cần cập nhật
+            NhanvienDTO nv = nhanvienBUS.getNhanvienByMaNV(selectedMaNhanVien.toString());
+
+            if (nv != null) {
+                // Đổ dữ liệu vào form
+                form.setDataForUpdate(nv);
+
+                // Disable trường mã khách hàng
+                form.disableFieldForUpdate();
+
+                // Thêm WindowListener để biết khi nào form đóng
+                form.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        // Load lại dữ liệu vào bảng khi form đóng
+                        loadNhanvienTable();
+                    }
+                });
+
+                form.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Không tìm thấy thông tin khách hàng!",
+                        "Lỗi",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Vui lòng chọn nhân viên cần cập nhật!",
+                    "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }// GEN-LAST:event_updateBtnMouseClicked
 
     private void deleteBtnMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_deleteBtnMouseClicked
@@ -399,6 +511,7 @@ public class Form_Nhanvien extends javax.swing.JPanel {
     private javax.swing.JTextField jtf_search;
     private javax.swing.JTable nhanvienTbl;
     private javax.swing.JButton reloadBtn;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

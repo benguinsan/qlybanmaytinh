@@ -67,7 +67,7 @@ public class NhanvienBUS {
     }
 
     // Tìm nhân viên theo mã
-    public NhanvienDTO findByMa(String ma_nhan_vien) {
+    public NhanvienDTO getNhanvienByMaNV(String ma_nhan_vien) {
         for (NhanvienDTO nv : this.listNhanvien) {
             if (nv.getMa_nhan_vien().equals(ma_nhan_vien)) {
                 return nv;
@@ -76,36 +76,38 @@ public class NhanvienBUS {
         return null;
     }
 
-    // Tìm nhân viên theo tên
-    public ArrayList<NhanvienDTO> findByName(String ten) {
-        ArrayList<NhanvienDTO> result = new ArrayList<>();
-        for (NhanvienDTO nv : this.listNhanvien) {
-            if (nv.getHo_ten().toLowerCase().contains(ten.toLowerCase())) {
-                result.add(nv);
-            }
-        }
-        return result;
-    }
+    public ArrayList<NhanvienDTO> searchNhanvien(String keyword) {
+        ArrayList<NhanvienDTO> searchResults = new ArrayList<>();
 
-    // Tìm nhân viên theo số điện thoại
-    public ArrayList<NhanvienDTO> findByPhone(String phone) {
-        ArrayList<NhanvienDTO> result = new ArrayList<>();
-        for (NhanvienDTO nv : this.listNhanvien) {
-            if (nv.getDien_thoai().contains(phone)) {
-                result.add(nv);
-            }
-        }
-        return result;
-    }
+        // Chuyển từ khóa về chữ thường để tìm kiếm không phân biệt hoa thường
+        String lowerKeyword = keyword.toLowerCase();
 
-    // Tìm nhân viên theo email
-    public ArrayList<NhanvienDTO> findByEmail(String email) {
-        ArrayList<NhanvienDTO> result = new ArrayList<>();
-        for (NhanvienDTO nv : this.listNhanvien) {
-            if (nv.getEmail().toLowerCase().contains(email.toLowerCase())) {
-                result.add(nv);
+        for (NhanvienDTO nv : listNhanvien) {
+            // Tìm theo mã khách hàng
+            if (nv.getMa_nhan_vien().toLowerCase().contains(lowerKeyword)) {
+                searchResults.add(nv);
+                continue;
+            }
+
+            // Tìm theo tên khách hàng
+            if (nv.getHo_ten().toLowerCase().contains(lowerKeyword)) {
+                searchResults.add(nv);
+                continue;
+            }
+
+            // Tìm theo số điện thoại
+            if (nv.getDien_thoai().contains(keyword)) {
+                searchResults.add(nv);
+                continue;
+            }
+
+            // Tìm theo email
+            if (nv.getEmail().contains(keyword)) {
+                searchResults.add(nv);
+                continue;
             }
         }
-        return result;
+
+        return searchResults;
     }
 }
