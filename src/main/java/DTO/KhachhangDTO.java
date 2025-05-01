@@ -17,17 +17,20 @@ public class KhachhangDTO {
     private String dia_chi;
     private String dien_thoai;
     private Date created_at;
+    private int trang_thai;
 
     public KhachhangDTO() {
 
     }
 
-    public KhachhangDTO(String ma_khach_hang, String ho_ten, String dia_chi, String dien_thoai, Date created_at) {
+    public KhachhangDTO(String ma_khach_hang, String ho_ten, String dia_chi, String dien_thoai, Date created_at,
+            int trang_thai) {
         this.ma_khach_hang = ma_khach_hang;
         this.ho_ten = ho_ten;
         this.dia_chi = dia_chi;
         this.dien_thoai = dien_thoai;
         this.created_at = created_at;
+        this.trang_thai = trang_thai;
     }
 
     public String getMa_khach_hang() {
@@ -68,6 +71,14 @@ public class KhachhangDTO {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public int getTrang_thai() {
+        return trang_thai;
+    }
+
+    public void setTrang_thai(int trang_thai) {
+        this.trang_thai = trang_thai;
     }
 
 }
