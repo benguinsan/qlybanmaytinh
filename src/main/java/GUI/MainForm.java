@@ -14,8 +14,8 @@ import GUI.form.Form_Khachhang;
 import GUI.form.Form_Nhanvien;
 import GUI.form.Form_HoaDon;
 import GUI.form.Form_Khuyenmai;
-import GUI.form.Form_ThongKe;
-
+//import GUI.form.Form_ThongKe;
+import GUI.form.ThongKeGUI;
 import java.awt.Color;
 import javax.swing.JComponent;
 
@@ -36,7 +36,7 @@ public class MainForm extends javax.swing.JFrame {
     private Form_Khachhang khachhang;
     private Form_Nhanvien nhanvien;
     private Form_HoaDon hoadon;
-    private Form_ThongKe thongke;
+    private ThongKeGUI thongke;
     private Form_Khuyenmai khuyenmai;
 
   
@@ -52,7 +52,7 @@ public class MainForm extends javax.swing.JFrame {
         khachhang = new Form_Khachhang();
         nhanvien = new Form_Nhanvien();
         hoadon = new Form_HoaDon();
-        thongke = new Form_ThongKe();
+        thongke = new ThongKeGUI();
         khuyenmai = new Form_Khuyenmai();
         
        
@@ -93,6 +93,7 @@ public class MainForm extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
