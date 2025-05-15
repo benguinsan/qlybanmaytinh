@@ -19,7 +19,7 @@ import java.util.logging.Level;
 public class DBConnection {
     private String user = "root";
     private String password = "";
-    private String url = "jdbc:mySQL://localhost:3306/quanlimaytinh";
+    private String url = "jdbc:mySQL://localhost:3307/qlybanmaytinh";
     private Connection conn = null;
     
     public void Connect() {
