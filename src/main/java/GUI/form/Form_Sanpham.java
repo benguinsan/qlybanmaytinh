@@ -4,6 +4,26 @@
  */
 package GUI.form;
 
+import BUS.SanphamBUS;
+import DTO.SanphamDTO;
+import GUI.component.SanPham.AddUpdateSanPhamForm;
+import java.awt.Color;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import GUI.component.SanPham.InforSanPhamForm;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.JOptionPane;
+import DTO.ChiTietSanPhamDTO;
+import BUS.ChiTietSanPhamBUS;
+import BUS.LoaisanphamBUS;
+import DTO.LoaisanphamDTO;
+import java.text.DecimalFormat;
 /**
  *
  * @author mrben
@@ -13,10 +33,34 @@ public class Form_Sanpham extends javax.swing.JPanel {
     /**
      * Creates new form Form_Sanpham
      */
+    public SanphamBUS sanPhamBUS;
+    ChiTietSanPhamBUS chiTietSanPhamBUS;
+    private Object selectedMaSanPham;
+    private LoaisanphamBUS loaiSPBUS;
+    private ArrayList<LoaisanphamDTO> dsLoai;
     public Form_Sanpham() {
         initComponents();
+        sanPhamBUS = new SanphamBUS();
+        chiTietSanPhamBUS = new ChiTietSanPhamBUS();
+        loaiSPBUS = new LoaisanphamBUS();
+        
+        loadSanphamTable();
+
     }
 
+    public void addPlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.ITALIC);
+        jtf.setFont(f);
+        jtf.setForeground(Color.gray);
+    }
+
+    public void removePlaceHolderStyle(JTextField jtf) {
+        Font f = jtf.getFont();
+        f = f.deriveFont(Font.PLAIN | Font.BOLD);
+        jtf.setFont(f);
+        jtf.setForeground(Color.black);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,30 +70,459 @@ public class Form_Sanpham extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jtf_search = new javax.swing.JTextField();
+        reloadBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        infoBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sanPhamTbl = new javax.swing.JTable();
 
-        jLabel1.setText("san pham");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jtf_search.setText("Search by ID/name");
+        jtf_search.setPreferredSize(new java.awt.Dimension(300, 22));
+        jtf_search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_searchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_searchFocusLost(evt);
+            }
+        });
+        jtf_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_searchActionPerformed(evt);
+            }
+        });
+
+        reloadBtn.setBackground(new java.awt.Color(153, 153, 153));
+        reloadBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/icons8-reload-30.png"))); // NOI18N
+        reloadBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reloadBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        reloadBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        reloadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reloadBtnMouseClicked(evt);
+            }
+        });
+
+        addBtn.setBackground(new java.awt.Color(204, 204, 204));
+        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/plus.png"))); // NOI18N
+        addBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        addBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtnMouseClicked(evt);
+            }
+        });
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
+
+        updateBtn.setBackground(new java.awt.Color(204, 204, 204));
+        updateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/office-material.png"))); // NOI18N
+        updateBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        updateBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtnMouseClicked(evt);
+            }
+        });
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+
+        deleteBtn.setBackground(new java.awt.Color(204, 204, 204));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/delete.png"))); // NOI18N
+        deleteBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        deleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteBtnMouseClicked(evt);
+            }
+        });
+
+        infoBtn.setBackground(new java.awt.Color(204, 204, 204));
+        infoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/information.png"))); // NOI18N
+        infoBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        infoBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        infoBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        infoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                infoBtnMouseClicked(evt);
+            }
+        });
+        infoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoBtnActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/icon/search.png"))); // NOI18N
+        searchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        searchBtn.setPreferredSize(new java.awt.Dimension(40, 40));
+        searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchBtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(infoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        sanPhamTbl.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        sanPhamTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã sản phẩm", "Tên sản phẩm", "Loại sản phẩm", "Số lượng", "Đơn giá"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        sanPhamTbl.setGridColor(new java.awt.Color(204, 204, 204));
+        sanPhamTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sanPhamTblClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(sanPhamTbl);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtf_searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_searchFocusGained
 
+    private void jtf_searchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_searchFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_searchFocusLost
+
+    private void jtf_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_searchActionPerformed
+
+    private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadBtnMouseClicked
+        // TODO add your handling code here:
+        // Reset search field to default state
+        jtf_search.setText("Search by ID/name");
+        addPlaceHolderStyle(jtf_search);
+
+        // Reload the table data
+        loadSanphamTable();
+    }//GEN-LAST:event_reloadBtnMouseClicked
+
+    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addBtnMouseClicked
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // TODO add your handling code here:
+        AddUpdateSanPhamForm form = new AddUpdateSanPhamForm();
+
+        // Thêm WindowListener để biết khi nào form đóng
+        form.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                // Load lại dữ liệu vào bảng khi form đóng
+                loadSanphamTable();
+            }
+        });
+
+        form.setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBtnMouseClicked
+
+    private void deleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnMouseClicked
+
+    private void infoBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_infoBtnMouseClicked
+
+    private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
+        // TODO add your handling code here:
+        String searchText = jtf_search.getText().trim();
+
+        // Nếu ô tìm kiếm trống hoặc chứa placeholder
+        if (searchText.isEmpty() || searchText.equals("Tìm kiếm theo mã/tên sản phẩm")) {
+            loadSanphamTable(); // Hiển thị toàn bộ sản phẩm
+            return;
+        }
+    
+        // Tìm kiếm sản phẩm theo mã hoặc tên
+        ArrayList<SanphamDTO> searchResults = sanPhamBUS.searchSanpham(searchText);
+    
+        // Hiển thị kết quả
+        displaySanPhamResults(searchResults);
+    }//GEN-LAST:event_searchBtnMouseClicked
+    
+        private void sanPhamTblClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sanPhamTblClicked
+            // TODO add your handling code here:
+            int selectedRow = sanPhamTbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Lấy giá trị ở cột 0 (cột đầu tiên) của hàng được chọn
+            String maNhanVien = sanPhamTbl.getValueAt(selectedRow, 0).toString();
+            System.out.println("Mã nhân viên: " + maNhanVien);
+
+            // Lưu mã nhân viên vào biến để sử dụng cho các thao tác khác
+            selectedMaSanPham = maNhanVien;
+        }
+    }//GEN-LAST:event_sanPhamTblClicked
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+        if (selectedMaSanPham != null) {
+            AddUpdateSanPhamForm form = new AddUpdateSanPhamForm();
+            
+            // Lấy thông tin sản phẩm cần cập nhật
+            SanphamDTO sp = sanPhamBUS.getSanphamByMaSP(selectedMaSanPham.toString());
+            
+            if (sp != null) {
+                // Đổ dữ liệu vào form
+                form.setDataForUpdate(sp);
+                
+                // Disable trường mã sản phẩm
+                form.disableFieldForUpdate();
+            
+                // Lắng nghe khi form đóng để load lại bảng
+                form.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        loadSanphamTable(); // Tải lại dữ liệu
+                    }
+                });
+            
+                form.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Không tìm thấy thông tin sản phẩm!",
+                        "Lỗi",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Vui lòng chọn sản phẩm cần cập nhật!",
+                    "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void infoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = sanPhamTbl.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm!");
+            return;
+        }
+    
+        // Lấy mã sản phẩm từ bảng (cột 0)
+        String maSP = sanPhamTbl.getValueAt(selectedRow, 0).toString();
+    
+        // Lấy đối tượng SanphamDTO từ BUS
+        SanphamDTO sp = sanPhamBUS.getSanphamByMaSP(maSP);
+        if (sp != null) {
+            // Tạo form chi tiết
+            InforSanPhamForm infoForm = new InforSanPhamForm();
+            infoForm.setDataForView(sp);
+            infoForm.setLocationRelativeTo(null); // căn giữa màn hình
+            infoForm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+        }
+    }//GEN-LAST:event_infoBtnActionPerformed
+
+    private void loadSanphamTable() {
+        this.sanPhamBUS.ListSanpham(); // Gọi hàm cập nhật danh sách sản phẩm từ DB
+        this.chiTietSanPhamBUS.ListChiTietSanpham();
+        DefaultTableModel model = (DefaultTableModel) sanPhamTbl.getModel();
+        model.setRowCount(0); // Xóa dữ liệu cũ
+
+        ArrayList<SanphamDTO> listSanpham = sanPhamBUS.getList();
+
+        for (SanphamDTO sp : listSanpham) {
+            ChiTietSanPhamDTO ctsp = chiTietSanPhamBUS.getCTSPByMaSP(sp.getMa_sp());
+            LoaisanphamDTO loai = loaiSPBUS.getLoaisanphamByMaLoai(sp.getMa_loai());
+
+            Object[] row = new Object[5];
+            row[0] = sp.getMa_sp();
+            row[1] = sp.getTenSP();
+            row[2] = (loai != null) ? loai.getTen_loai() : "Không xác định";
+            row[3] = (ctsp != null) ? ctsp.getSo_luong_ton() : 0;
+            DecimalFormat df = new DecimalFormat("#,###");
+            row[4] = (ctsp != null) ? df.format(sp.getDonGia()) + "đ" : "0đ";
+
+
+            model.addRow(row);
+        }
+
+        // Căn giữa một số cột
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        sanPhamTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Mã sản phẩm
+        sanPhamTbl.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Đơn giá
+        sanPhamTbl.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Loại
+        sanPhamTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Số lượng
+        sanPhamTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer); // Đơn giá
+        // Tăng chiều cao dòng
+        sanPhamTbl.setRowHeight(30);
+
+        // (Tuỳ chọn) Font cho bảng
+        sanPhamTbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        sanPhamTbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+    }   
+
+    // Hiển thị khi thao tác
+    private void displaySanPhamResults(ArrayList<SanphamDTO> listSanpham) {
+        DefaultTableModel model = (DefaultTableModel) sanPhamTbl.getModel();
+        model.setRowCount(0); // Xóa dữ liệu cũ
+
+        for (SanphamDTO sp : listSanpham) {
+            ChiTietSanPhamDTO ctsp = chiTietSanPhamBUS.getCTSPByMaSP(sp.getMa_sp());
+            LoaisanphamDTO loai = loaiSPBUS.getLoaisanphamByMaLoai(sp.getMa_loai());
+
+            Object[] row = new Object[5];
+            row[0] = sp.getMa_sp();
+            row[1] = sp.getTenSP();
+            row[2] = (loai != null) ? loai.getTen_loai() : "Không xác định";
+            row[3] = (ctsp != null) ? ctsp.getSo_luong_ton() : 0;
+
+            DecimalFormat df = new DecimalFormat("#,###");
+            row[4] = (ctsp != null) ? df.format(ctsp.getGia_ban()) + "đ" : "0đ";
+
+            model.addRow(row);
+        }
+
+        // Căn giữa các cột cần thiết
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        sanPhamTbl.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Mã sản phẩm
+        sanPhamTbl.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Loại
+        sanPhamTbl.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Số lượng
+        sanPhamTbl.getColumnModel().getColumn(4).setCellRenderer(centerRenderer); // Đơn giá
+    }
+
+
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton infoBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jtf_search;
+    private javax.swing.JButton reloadBtn;
+    private javax.swing.JTable sanPhamTbl;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
