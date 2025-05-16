@@ -15,6 +15,17 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 /**
  *
@@ -68,6 +79,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         khachhangTbl = new javax.swing.JTable();
 
@@ -164,6 +176,13 @@ public class Form_Khachhang extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Xuất excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -177,6 +196,8 @@ public class Form_Khachhang extends javax.swing.JPanel {
                 .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(infoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,9 +215,10 @@ public class Form_Khachhang extends javax.swing.JPanel {
                     .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -267,6 +289,76 @@ public class Form_Khachhang extends javax.swing.JPanel {
         // Hiển thị kết quả tìm kiếm
         displaySearchResults(searchResults);
     }//GEN-LAST:event_searchBtnMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Lưu file Excel");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
+
+    int userSelection = fileChooser.showSaveDialog(this);
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File fileToSave = fileChooser.getSelectedFile();
+        String filePath = fileToSave.getAbsolutePath();
+
+        if (!filePath.endsWith(".xlsx")) {
+            filePath += ".xlsx";
+        }
+
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Khách hàng");
+
+            // Tiêu đề cột
+            Row header = sheet.createRow(0);
+            String[] columnHeaders = {"Mã KH", "Họ tên", "Địa chỉ", "Điện thoại", "Ngày tạo", "Trạng thái"};
+            for (int i = 0; i < columnHeaders.length; i++) {
+                Cell cell = header.createCell(i);
+                cell.setCellValue(columnHeaders[i]);
+            }
+
+            // Format ngày tháng
+            CreationHelper createHelper = workbook.getCreationHelper();
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+
+            // Lấy danh sách khách hàng từ BUS
+            ArrayList<KhachhangDTO> listKhachHang = khachHangBUS.getList();
+
+            for (int i = 0; i < listKhachHang.size(); i++) {
+                KhachhangDTO kh = listKhachHang.get(i);
+                Row row = sheet.createRow(i + 1);
+
+                row.createCell(0).setCellValue(kh.getMa_khach_hang());
+                row.createCell(1).setCellValue(kh.getHo_ten());
+                row.createCell(2).setCellValue(kh.getDia_chi());
+                row.createCell(3).setCellValue(kh.getDien_thoai());
+
+                Cell cellNgayTao = row.createCell(4);
+                if (kh.getCreated_at() != null) {
+                    cellNgayTao.setCellValue(kh.getCreated_at());
+                    cellNgayTao.setCellStyle(dateCellStyle);
+                }
+
+                row.createCell(5).setCellValue(kh.getTrang_thai() == 1 ? "Đang hoạt động" : "Ngừng hoạt động");
+            }
+
+            // Auto resize cột
+            for (int i = 0; i < columnHeaders.length; i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+            try (FileOutputStream out = new FileOutputStream(filePath)) {
+                workbook.write(out);
+                JOptionPane.showMessageDialog(this, "Xuất file Excel khách hàng thành công!");
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi ghi file Excel: " + ex.getMessage());
+        }
+    }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void loadDataIntoKhachHangTbl() {
         this.khachHangBUS.ListKhachhang();
@@ -498,6 +590,7 @@ public class Form_Khachhang extends javax.swing.JPanel {
     private javax.swing.JButton addBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JButton infoBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
