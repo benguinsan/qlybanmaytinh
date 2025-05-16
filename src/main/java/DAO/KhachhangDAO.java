@@ -85,7 +85,7 @@ public class KhachhangDAO {
             System.out.println("Error in file: KhachHangDAO.java");
             return false;
         }
-    }
+    } 
 
     public KhachhangDTO getKhachhangByMaKH(String maKH) {
         String sql = "SELECT * FROM khach_hang WHERE ma_khach_hang = '" + maKH + "'";
@@ -107,4 +107,5 @@ public class KhachhangDAO {
         }
         return null;
     }
+    
 }
