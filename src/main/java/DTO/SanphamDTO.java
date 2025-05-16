@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTO;
+
 import java.util.Date;
 
 /**
@@ -14,19 +15,30 @@ public class SanphamDTO {
     private String ma_sp;
     private String TenSP;
     private String ma_loai;
-    private double DonGia;
+    private String chip;
+    private String card;
+    private String ram;
+    private double gia_ban;
+    private int so_luong_ton;
     private Date created_at;
+    private int trang_thai; 
 
     public SanphamDTO() {
-
     }
 
-    public SanphamDTO(String ma_sp, String TenSP, String ma_loai, double DonGia, Date created_at) {
+    public SanphamDTO(String ma_sp, String TenSP, String ma_loai, String chip,
+            String card, String ram, double gia_ban, int so_luong_ton,
+            Date created_at, int trang_thai) {
         this.ma_sp = ma_sp;
         this.TenSP = TenSP;
         this.ma_loai = ma_loai;
-        this.DonGia = DonGia;
+        this.chip = chip;
+        this.card = card;
+        this.ram = ram;
+        this.gia_ban = gia_ban;
+        this.so_luong_ton = so_luong_ton;
         this.created_at = created_at;
+        this.trang_thai = trang_thai;
     }
 
     public String getMa_sp() {
@@ -53,19 +65,69 @@ public class SanphamDTO {
         this.ma_loai = ma_loai;
     }
 
-    public double getDonGia() {
-        return DonGia;
+    public String getChip() {
+        return chip;
     }
 
-    public void setDonGia(double DonGia) {
-        this.DonGia = DonGia;
+    public void setChip(String chip) {
+        this.chip = chip;
     }
 
-    public java.util.Date getCreated_at() {
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
+    }
+
+    public String getRam() {
+        return ram;
+    }
+
+    public void setRam(String ram) {
+        this.ram = ram;
+    }
+
+    public double getGia_ban() {
+        return gia_ban;
+    }
+
+    public void setGia_ban(double gia_ban) {
+        this.gia_ban = gia_ban;
+    }
+
+    public int getSo_luong_ton() {
+        return so_luong_ton;
+    }
+
+    public void setSo_luong_ton(int so_luong_ton) {
+        this.so_luong_ton = so_luong_ton;
+    }
+
+    public Date getCreated_at() {
         return created_at;
     }
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
+
+    public int getTrang_thai() {
+        return trang_thai;
+    }
+
+    public void setTrang_thai(int trang_thai) {
+        this.trang_thai = trang_thai;
+    }
+
+    // // Phương thức tiện ích để kiểm tra trạng thái
+    // public boolean isActive() {
+    //     return trang_thai == 1;
+    // }
+
+    // // Phương thức tiện ích để lấy chuỗi mô tả trạng thái
+    // public String getTrangThaiText() {
+    //     return trang_thai == 1 ? "Đang kinh doanh" : "Ngừng kinh doanh";
+    // }
 }

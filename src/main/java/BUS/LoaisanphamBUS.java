@@ -21,7 +21,7 @@ public class LoaisanphamBUS {
         loaisanphamDAO = new LoaisanphamDAO();
     }
 
-    public List<LoaisanphamDTO> getAllLoaisanpham() {
+    public ArrayList<LoaisanphamDTO> getAllLoaisanpham() {
         return loaisanphamDAO.getAllLoaiSanPham();
     }
 

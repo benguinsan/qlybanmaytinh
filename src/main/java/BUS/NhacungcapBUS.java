@@ -8,7 +8,7 @@ import DAO.NhacungcapDAO;
 import DTO.NhacungcapDTO;
 
 import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +21,7 @@ public class NhacungcapBUS {
         nhacungcapDAO = new NhacungcapDAO();
     }
 
-    public List<NhacungcapDTO> getAllNhacungcap() {
+    public ArrayList<NhacungcapDTO> getAllNhacungcap() {
         return nhacungcapDAO.getAllNhacungcap();
     }
 
