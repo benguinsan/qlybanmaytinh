@@ -153,9 +153,7 @@ public class Form_Phieunhap extends javax.swing.JPanel {
                 tablePhieuNhap.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
                 tablePhieuNhap.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
                 tablePhieuNhap.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-                
-
-                
+                    
         }
 
         private void tablePhieuNhapClicked(java.awt.event.MouseEvent evt) {
