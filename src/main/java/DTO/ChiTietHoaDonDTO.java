@@ -10,32 +10,33 @@ package DTO;
  */
 public class ChiTietHoaDonDTO {
 
-    private int ma_cthd;
+    private int ma_ct_hd;
     private int so_luong;
     private float don_gia;
     private float thanh_tien;
-    private int ma_hoa_don;
-    private int ma_sp;
-    
+    private String ma_hd;
+    private String ma_sp;
+
     public ChiTietHoaDonDTO() {
 
     }
 
-    public ChiTietHoaDonDTO(int ma_cthd, int so_luong, float don_gia, float thanh_tien, int ma_hoa_don, int ma_sp) {
-        this.ma_cthd = ma_cthd;
+    public ChiTietHoaDonDTO(int ma_ct_hd, int so_luong, float don_gia, float thanh_tien, String ma_hd,
+            String ma_sp) {
+        this.ma_ct_hd = ma_ct_hd;
         this.so_luong = so_luong;
         this.don_gia = don_gia;
         this.thanh_tien = thanh_tien;
-        this.ma_hoa_don = ma_hoa_don;
+        this.ma_hd = ma_hd;
         this.ma_sp = ma_sp;
     }
 
-     public int getMa_cthd() {
-        return ma_cthd;
+    public int getMa_ct_hd() {
+        return ma_ct_hd;
     }
 
-    public void setMa_cthd(int ma_cthd) {
-        this.ma_cthd = ma_cthd;
+    public void setMa_ct_hd(int ma_ct_hd) {
+        this.ma_ct_hd = ma_ct_hd;
     }
 
     public int getSo_luong() {
@@ -62,19 +63,19 @@ public class ChiTietHoaDonDTO {
         this.thanh_tien = thanh_tien;
     }
 
-    public int getMa_hoa_don() {
-        return ma_hoa_don;
+    public String getMa_hd() {
+        return ma_hd;
     }
 
-    public void setMa_hoa_don(int ma_hoa_don) {
-        this.ma_hoa_don = ma_hoa_don;
+    public void setMa_hd(String ma_hd) {
+        this.ma_hd = ma_hd;
     }
 
-    public int getMa_sp() {
+    public String getMa_sp() {
         return ma_sp;
     }
 
-    public void setMa_sp(int ma_sp) {
+    public void setMa_sp(String ma_sp) {
         this.ma_sp = ma_sp;
     }
 }

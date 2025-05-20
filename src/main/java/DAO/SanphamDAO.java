@@ -135,4 +135,22 @@ public class SanphamDAO {
         }
     }
 
+    /**
+     * Cập nhật số lượng sản phẩm trong database
+     * @param maSP Mã sản phẩm cần cập nhật
+     * @param soLuongMoi Số lượng mới của sản phẩm
+     * @return true nếu cập nhật thành công, false nếu thất bại
+     */
+    public boolean updateSoLuong(int maSP, int soLuongMoi) {
+        try {
+            String sql = "UPDATE san_pham SET so_luong_ton = " + soLuongMoi + " WHERE ma_sp = " + maSP;
+            db.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in file: SanphamDAO.java");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
